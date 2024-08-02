@@ -1,0 +1,44 @@
+---
+name: Demo
+schemaVersion: 1
+workflows:
+  Mirai_workflow:
+    type:
+      language: wdl
+      # version 1.1 required for gpu support
+      version: 1.1
+    sourceURL: Mirai_workflow/
+data:
+  - location: s3://imds-standardized-inputs
+    readOnly: true
+contexts:
+  # Our AMI:
+  # amzn2-ami-ecs-gpu-hvm-2.0.20230314-x86_64-ebs
+  # ami-0c12a0ff9442b08ac
+  # Amazon Linux AMI 2.0.20230314 x86_64 ECS HVM GP2
+
+  # Prereq - configure the CLI to use a specific AMI
+  # For us-west-2:
+  # export ECS_GPU_AMI=ami-0c12a0ff9442b08ac
+  # For us-east-1:
+  # export ECS_GPU_AMI=ami-0d996631acac16517
+  # agc account activate --ami $ECS_GPU_AMI
+
+
+  # Do a test, print out the driver config `nvidia-smi`
+
+  # Then, agc workflow run -c gpuContext hello-gpu
+  # To apply changes: agc context deploy -c gpuContext 
+
+  # To stop a workflow: agc workflow stop workflow_id
+
+# g4dn.xlarge: # 5 EC2 instances * 4 VCpus = 20 
+  gpuContext:
+    maxVCpus: 512 # at most 8 VCpus/instance for 2xlarge -> 2 instances/cluster: RAM (2xlarge): 32 GB # 64 total | # maxVCpus: 40 -> 5 instances
+    engines:
+      - type: wdl
+        engine: miniwdl
+    instanceTypes:
+      - g4dn.2xlarge
+
+# 512 vCPUs -> 64 g4dn.2xlarge Instances

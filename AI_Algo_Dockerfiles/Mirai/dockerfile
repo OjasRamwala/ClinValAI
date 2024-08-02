@@ -1,0 +1,19 @@
+FROM 730335476018.dkr.ecr.us-west-2.amazonaws.com/risk-prediction/mirai:stable
+RUN apt-get update
+RUN apt-get install -y zip
+RUN apt-get install -y unzip
+RUN apt-get install -y tree
+RUN apt-get install -y python3-pip 
+RUN python3.6 -m pip install --user boto3
+RUN python3.6 -m pip install --user pydicom==2.3.1
+RUN python3.6 -m pip install --user python-gdcm==3.0.22
+RUN python3.6 -m pip install --user pylibjpeg==1.3.0
+RUN python3.6 -m pip install --user pylibjpeg-libjpeg==1.2.0
+COPY *.py . 
+COPY dcm_to_png.sh .
+
+# pydicom==2.3.1
+# python-dateutil==2.8.2
+# python-gdcm==3.0.22
+# pylibjpeg==1.4.0
+# pylibjpeg-libjpeg==1.3.4
