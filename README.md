@@ -5,7 +5,7 @@ This repository was used to build ClinValAI, a cloud-agnostic unified framework 
 
 # Reproducing ClinValAI
 
-- AI_Algo_Dockerfiles: Scripts to enable the customization of docker images to facilitate the execution of input auditing, data standardization, data restructuring, algorithm inferencing, and score extraction.
+- AI_Algo_Dockerfiles: Scripts to enable the customization of docker images to facilitate the execution of input auditing, data standardization, data restructuring, algorithm inferencing, and score extraction mechanisms.
 
 - miniwdl_workflows: Scripts for workflow representation, job scheduling, and batch processing orchestration mechanisms.
 
